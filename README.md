@@ -1,1 +1,0 @@
-# Eksamen-vinter25---2-Sauna
