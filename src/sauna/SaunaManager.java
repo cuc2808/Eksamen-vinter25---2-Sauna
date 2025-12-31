@@ -11,8 +11,21 @@ public class SaunaManager {
     public int i = 0;
     public static String previousName = null;
     public ArrayList<Sauna> saunas = new ArrayList<>();
+    public TreeMap<Double, Sauna> sortedCostMap = new TreeMap<>();
 
     public void printReport() {
+
+        System.out.println("Gennemsnitlig koster det " +  getAverageCost("electric") + "kr. med de elektriske Saunaer");
+        System.out.println("Gennemsnitlig koster det " +  getAverageCost("wood") + "kr. med træsaunaer");
+
+        if(getAverageCost("electric") < getAverageCost("wood")){
+            System.out.println("Det er billigere med elektriske saunaer.");
+        } else if (getAverageCost("electric") > getAverageCost("wood")){
+            System.out.println("Det er billigere med saunaer som kører på træ.");
+        }
+
+        System.out.printf("Den dyreste sauna er " + getMostExpensive());
+        System.out.printf("Den billigste sauna er " + getCheapest());
 
     }
 
@@ -57,7 +70,9 @@ public class SaunaManager {
                     previousName = saunaName;
                 } else if(saunaName.equals(previousName)){
                     for (Sauna sauna : saunas) {
-                        sauna.addTemperature(degreeInSauna);
+                        if(sauna.getName().equals(saunaName)) {
+                            sauna.addTemperature(degreeInSauna);
+                        }
                     }
                 }
             }
@@ -76,7 +91,7 @@ public class SaunaManager {
                 if (sauna instanceof WoodSauna) {
                     totalCost = totalCost + sauna.calculateDailyCost();
                     ammountOfSaunas++;
-                    //System.out.println("wood");
+//                    System.out.println("wood");
                 }
             }
         } else if (type == "electric") {
@@ -84,7 +99,7 @@ public class SaunaManager {
                 if (sauna instanceof ElectricSauna) {
                     totalCost = totalCost + sauna.calculateDailyCost();
                     ammountOfSaunas++;
-                    System.out.println("electric");
+//                    System.out.println("electric");
                 }
             }
 
@@ -94,12 +109,20 @@ public class SaunaManager {
         return averageCost;
     }
 
-    public Sauna getMostExpensive() {
-        return null;
+    public String getMostExpensive() {
+        for (Sauna sauna : saunas) {
+            double dailyCost = sauna.calculateDailyCost();
+            sortedCostMap.put(dailyCost,sauna);
+        }
+        return sortedCostMap.get(sortedCostMap.lastKey()).getName() + " som koster " + sortedCostMap.lastKey() + "kr. dagligt\n";
     }
 
-    public Sauna getCheapest() {
-        return null;
+    public String getCheapest() {
+        for (Sauna sauna : saunas) {
+            double dailyCost = sauna.calculateDailyCost();
+            sortedCostMap.put(dailyCost,sauna);
+        }
+        return sortedCostMap.get(sortedCostMap.firstKey()).getName() + " som koster " + sortedCostMap.firstKey() + "kr. dagligt\n";
     }
 
 }

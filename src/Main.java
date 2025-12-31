@@ -6,7 +6,7 @@ public class Main {
     public static void main(String[] args) {
         SaunaManager manage = new SaunaManager();
         manage.loadAndCreateSaunas("src/sauna/sauna.csv");
-        System.out.println(manage.getAverageCost("wood"));
+        manage.printReport();
 
 
     }
