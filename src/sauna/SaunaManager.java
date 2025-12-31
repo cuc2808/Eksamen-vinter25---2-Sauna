@@ -41,7 +41,7 @@ public class SaunaManager {
                 if (saunas.isEmpty()) {
                     if (saunaType.equals("wood")) {
                         saunas.add(new WoodSauna(saunaName));
-                        System.out.println("Sauna created" + saunaName);
+                        //System.out.println("Sauna created" + saunaName);
                     } else if (saunaType.equals("electric")) {
                         saunas.add(new ElectricSauna(saunaName));
                     }
@@ -49,10 +49,10 @@ public class SaunaManager {
                 } else if (!saunaName.equals(previousName)) {
                     if (saunaType.equals("wood")) {
                         saunas.add(new WoodSauna(saunaName));
-                        System.out.println("WSauna created" + saunaName);
+                        //System.out.println("WSauna created" + saunaName);
                     } else if (saunaType.equals("electric")) {
                         saunas.add(new ElectricSauna(saunaName));
-                        System.out.println("ESauna created" + saunaName);
+                        //System.out.println("ESauna created" + saunaName);
                     }
                     previousName = saunaName;
                 } else if(saunaName.equals(previousName)){
@@ -76,7 +76,7 @@ public class SaunaManager {
                 if (sauna instanceof WoodSauna) {
                     totalCost = totalCost + sauna.calculateDailyCost();
                     ammountOfSaunas++;
-                    System.out.println("wood");
+                    //System.out.println("wood");
                 }
             }
         } else if (type == "electric") {
