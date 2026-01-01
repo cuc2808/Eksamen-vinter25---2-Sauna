@@ -1,11 +1,13 @@
 package sauna;
 
 import java.util.ArrayList;
+import java.util.TreeMap;
 
 public class ElectricSauna implements Sauna {
 
     String name;
     ArrayList<Integer> temperatures = new ArrayList<>();
+    TreeMap<Double,Integer> hourCosts = new TreeMap<>();
 
     public ElectricSauna(String name) {
         this.name = name;
@@ -36,6 +38,25 @@ public class ElectricSauna implements Sauna {
         }
 
         return dailyCost;
+    }
+
+    public void sortHoursByCost() {
+
+        int hourNumber = 5;
+
+        for (Integer temperature : temperatures) {
+            double hourCost;
+            if (temperature > 50) {
+                hourCost = 8;
+                if (temperature > 70){
+                    hourCost += ((temperature - 70) * 2);
+                }
+            } else {
+                hourCost = 0;
+            }
+            hourCosts.put(hourCost, hourNumber);
+            hourNumber++;
+        }
     }
 }
 

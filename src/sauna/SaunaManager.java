@@ -43,6 +43,8 @@ public class SaunaManager {
         }
 
 
+
+
     }
 
     public void loadAndCreateSaunas(String fileName) {
