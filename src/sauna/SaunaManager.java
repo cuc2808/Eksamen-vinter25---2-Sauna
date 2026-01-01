@@ -15,17 +15,33 @@ public class SaunaManager {
 
     public void printReport() {
 
-        System.out.println("Gennemsnitlig koster det " +  getAverageCost("electric") + "kr. med de elektriske Saunaer");
-        System.out.println("Gennemsnitlig koster det " +  getAverageCost("wood") + "kr. med træsaunaer");
+        System.out.println("**-------------------------------------------------------**");
+        System.out.println("        Sauna Rapport med udgangspunkt i Sauna.csv");
+        System.out.println("**-------------------------------------------------------**\n");
 
-        if(getAverageCost("electric") < getAverageCost("wood")){
-            System.out.println("Det er billigere med elektriske saunaer.");
-        } else if (getAverageCost("electric") > getAverageCost("wood")){
-            System.out.println("Det er billigere med saunaer som kører på træ.");
+        System.out.println("========== Daglige omkostninger for hver sauna ============\n");
+        for (Sauna sauna : saunas) {
+            System.out.println("Sauna: " + sauna.getName());
+            System.out.println(" -- Pris. pr. dag: " + sauna.calculateDailyCost() + "kr.\n");
         }
 
         System.out.printf("Den dyreste sauna er " + getMostExpensive());
-        System.out.printf("Den billigste sauna er " + getCheapest());
+        System.out.printf("Den billigste sauna er " + getCheapest() + "\n");
+
+        System.out.println("============ Gennemsnitspris for sauna type ===============\n");
+        System.out.println("Sauna med el:");
+        System.out.printf(" -- Gennemsnitlig koster det %5.2f", getAverageCost("electric"));
+        System.out.println("kr. med de elektriske Saunaer.\n");
+        System.out.println("Sauna med træ:");
+        System.out.printf(" -- Gennemsnitlig koster det %5.2f",  getAverageCost("wood"));
+        System.out.println("kr. med træsaunaer.\n");
+
+        if(getAverageCost("electric") < getAverageCost("wood")){
+            System.out.println("Af denne grund er det billigere at benytte sauna med el.");
+        } else if (getAverageCost("electric") > getAverageCost("wood")){
+            System.out.println("Af denne grund er det billigere at benytte sauna med træ.");
+        }
+
 
     }
 
@@ -62,13 +78,13 @@ public class SaunaManager {
                 } else if (!saunaName.equals(previousName)) {
                     if (saunaType.equals("wood")) {
                         saunas.add(new WoodSauna(saunaName));
-                        //System.out.println("WSauna created" + saunaName);
+//                        System.out.println("WSauna created" + saunaName);
                     } else if (saunaType.equals("electric")) {
                         saunas.add(new ElectricSauna(saunaName));
-                        //System.out.println("ESauna created" + saunaName);
+//                        System.out.println("ESauna created" + saunaName);
                     }
                     previousName = saunaName;
-                } else if(saunaName.equals(previousName)){
+                } else {
                     for (Sauna sauna : saunas) {
                         if(sauna.getName().equals(saunaName)) {
                             sauna.addTemperature(degreeInSauna);

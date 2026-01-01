@@ -23,14 +23,14 @@ public class WoodSauna implements Sauna {
 
     @Override
     public double calculateDailyCost() {
-
         int dailyCost = 0;
 
         for (Integer temperature : temperatures) {
-            if(temperature > 50){
-                dailyCost = dailyCost + 12;
+            if (temperature > 50) {
+                dailyCost += 12;
             }
         }
+
         return dailyCost;
     }
 }
