@@ -47,14 +47,7 @@ public class SaunaManager {
 
     }
 
-    public void loadAndCreateSaunas(String fileName) {
-        String filePath = fileName;
-
-
-        if (filePath == null) {
-            throw new RuntimeException("Filen blev ikke fundet.");
-        }
-
+    public void loadAndCreateSaunas(String filePath) {
         File file = new File(filePath);
 
         try (Scanner scannerF = new Scanner(file)) {
@@ -63,11 +56,11 @@ public class SaunaManager {
             while (scannerF.hasNextLine()) {
 
                 String line = scannerF.nextLine();
-                String[] f = line.split(",");
+                String[] lineSegment = line.split(",");
 
-                int degreeInSauna = Integer.parseInt(f[1]);
-                String saunaName = f[2];
-                String saunaType = f[3];
+                int degreeInSauna = Integer.parseInt(lineSegment[1]);
+                String saunaName = lineSegment[2];
+                String saunaType = lineSegment[3];
 
                 if (saunas.isEmpty()) {
                     if (saunaType.equals("wood")) {
